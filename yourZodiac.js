@@ -14,7 +14,10 @@ async function updateAll(e) {
   try {
     e.preventDefault();
     currentData = await getZodiacByYear(birthYear.value);
-    const markup = generatePersonalMarkup() + (await enerateCompatibleMarkup());
+    birthYear.value = '';
+    clear();
+    const markup =
+      generatePersonalMarkup() + (await generateCompatibleMarkup());
     question.insertAdjacentHTML('afterend', markup);
   } catch (err) {
     console.error(err);
@@ -31,7 +34,7 @@ function generatePersonalMarkup() {
           <h2><span>"${name.toUpperCase()}"</span> is your zodiac</h2>
         </div>
         <div class="your-zodiac-img">
-          <img src="./images/${name}.png">
+          <img src="./images/${name}.webp">
         </div>
         <div class="your-zodiac-des">
           <p>You are: </p>
@@ -43,7 +46,7 @@ function generatePersonalMarkup() {
           </ul>
         </div>
         <div class="your-zodiac-element">
-          <img src="elelments/${element}.png" >
+          <img src="elelments/${element}.webp" >
           <p>${element}</p>
         </div>
       </div>
@@ -53,9 +56,13 @@ function generatePersonalMarkup() {
 
 async function generateCompatibleMarkup() {
   zodiacs = currentData.compatibility;
-  data1 = await getZodiacByName(zodiacs[0]);
-  data2 = await getZodiacByName(zodiacs[1]);
-  data3 = await getZodiacByName(zodiacs[3]);
+  try {
+    data1 = await getZodiacByName(zodiacs[0].toLowerCase());
+    data2 = await getZodiacByName(zodiacs[1].toLowerCase());
+    data3 = await getZodiacByName(zodiacs[2].toLowerCase());
+  } catch (err) {
+    console.error(err);
+  }
 
   name1 = data1.name.toLowerCase();
   name2 = data2.name.toLowerCase();
@@ -72,21 +79,21 @@ async function generateCompatibleMarkup() {
         </div>
         <div class="compatibale-content">
         <div class="compatible1">
-          <div class="cp1-img"><img src="./images/${name1}.png"></div>
+          <div class="cp1-img"><img src="./images/${name1}.webp"></div>
           <div class="cp1-content">
             <h2>${name1.toUpperCase()}</h2>
             <p>You're compatible with people who are born in ${years1}!</p>
           </div>
         </div>
         <div class="compatible2">
-          <div class="cp2-img"><img src="./images/${name2}.png"></div>
+          <div class="cp2-img"><img src="./images/${name2}.webp"></div>
           <div class="cp2-content">
             <h2>${name2.toUpperCase()}</h2>
             <p>You're compatible with people who are born in ${years2}!</p>
           </div>
         </div>
         <div class="compatible3">
-          <div class="cp3-img"><img src="./images/${name3}.png"></div>
+          <div class="cp3-img"><img src="./images/${name3}.webp"></div>
           <div class="cp3-content">
             <h2>${name3.toUpperCase()}</h2>
             <p>You're compatible with people who are born in ${years3}!</p>
@@ -97,6 +104,11 @@ async function generateCompatibleMarkup() {
     `;
 
   return markup;
+}
+
+function clear() {
+  document.querySelector('.your-zodiac')?.remove();
+  document.querySelector('.compatible')?.remove();
 }
 
 async function getZodiacByName(name) {

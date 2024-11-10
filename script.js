@@ -74,5 +74,5 @@ function toText() {
 }
 
 function toBackground() {
-  carousel.style.backgroundImage = `url(backgrounds/${allBackgrounds[index]}.png)`;
+  carousel.style.backgroundImage = `url(backgrounds/${allBackgrounds[index]}.webp)`;
 }
