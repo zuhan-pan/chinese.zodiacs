@@ -1,0 +1,72 @@
+@media (max-width: 1600px) {
+  .img-box {
+    left: -70%;
+  }
+} /* For desktops */
+
+@media (max-width: 1400px) {
+  .img-box {
+    left: -92%;
+  }
+  .content-birth-year {
+    font-size: 17px;
+  }
+
+  .question input:focus + .label-birth-year .content-birth-year,
+  .question input:valid + .label-birth-year .content-birth-year {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .img-box {
+    position: absolute;
+    top: 1200px;
+    left: 600px;
+    transform: translate(calc(-50vw - 650px), calc(-50vh + 50px));
+    width: 400px;
+    height: 400px;
+  }
+
+  .img-item.active .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(calc(-50vw + 300px), calc(-50vh + 400px));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .info-box {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+  }
+
+  .info-box .info-item {
+    transform: translateY(110%);
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+  }
+  .info-box .info-item.active {
+    transform: translateY(0%);
+  }
+
+  .content-birth-year {
+    font-size: 15px;
+  }
+
+  .question input:focus + .label-birth-year .content-birth-year,
+  .question input:valid + .label-birth-year .content-birth-year {
+    font-size: 12px;
+  }
+
+  .submit-btn {
+    display: none;
+  }
+}
